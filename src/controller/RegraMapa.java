@@ -39,15 +39,12 @@ public class RegraMapa {
 	
 	public boolean verificarSolucaoPossivel(List<No> solucao){
 		
-		System.out.println(this.getGrafo().getArestas());
 		byte resultado = 0;
 		byte tamanhoSolucao = (byte) solucao.size();
 		byte tamanhoGrafo = (byte) this.getGrafo().getArestas().size();
 		for (byte i=1;i < tamanhoSolucao;i++) {
 			for(byte j =0; j < tamanhoGrafo; j++){
-				System.out.println(solucao.get(i-1).getDescricao());
-				System.out.println(solucao.get(i).getDescricao());
-                if(solucao.get(i-1).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoEsquerdo().getDescricao())){
+				if(solucao.get(i-1).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoEsquerdo().getDescricao())){
 					if(solucao.get(i).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoDireito().getDescricao())){
 						resultado ++;
 					}
@@ -61,10 +58,54 @@ public class RegraMapa {
 				
 			}
 		}
-		
-		System.out.println(resultado);
 		return resultado >= 4;
 		
+	}
+	
+	public Double valorFuncaoSolucao(List<No> solucao){
+
+		List<String> resultadosVisto = new ArrayList<>();
+		Double resultado = 0d;
+		byte tamanhoSolucao = (byte) solucao.size();
+		byte tamanhoGrafo = (byte) this.getGrafo().getArestas().size();
+		for (byte i=1;i < tamanhoSolucao;i++) {
+			for(byte j =0; j < tamanhoGrafo; j++){
+				
+				String primeira = solucao.get(i-1).getDescricao();
+				String segunda = solucao.get(i).getDescricao();
+				
+				if(solucao.get(i-1).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoEsquerdo().getDescricao())){
+					if(solucao.get(i).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoDireito().getDescricao())){
+						 if(this.alteraValorResultado(solucao.get(i-1).getDescricao(), solucao.get(i).getDescricao(),resultadosVisto)){
+							 resultadosVisto.add(primeira+segunda);
+						     resultadosVisto.add(segunda+primeira);
+						     resultado+= this.getGrafo().getArestas().get(j).getPeso();
+						 }
+					}
+				}
+				
+				if(solucao.get(i-1).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoDireito().getDescricao())){
+					 if(solucao.get(i).getDescricao().equals(this.getGrafo().getArestas().get(j).getPontoEsquerdo().getDescricao())){
+						if(this.alteraValorResultado(solucao.get(i-1).getDescricao(), solucao.get(i).getDescricao(),resultadosVisto)){
+						  resultadosVisto.add(primeira+segunda);
+						  resultadosVisto.add(segunda+primeira);
+						  resultado+= this.getGrafo().getArestas().get(j).getPeso();
+						}
+					 }
+				}
+				
+			}
+		}
+		return resultado;
+	}
+	
+	public boolean alteraValorResultado(String primeira, String segunda, List<String> resultadosVisto){
+		 String valorAtual = segunda+primeira;
+		 Boolean valor = resultadosVisto.contains(valorAtual);
+		 if(!valor){
+			return true;
+		 }
+		 return false;
 	}
 	
 	public RegraMapa(){

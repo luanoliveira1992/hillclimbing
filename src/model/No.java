@@ -18,6 +18,12 @@ public class No {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	@Override
+	public String toString() {
+		return "No [descricao=" + descricao + "]";
+	}
+	
+	
 	
 	
 	

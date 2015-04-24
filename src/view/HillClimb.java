@@ -5,16 +5,38 @@ import java.util.List;
 
 import model.No;
 import controller.RegraMapa;
+import controller.Vizinho;
 
 public class HillClimb {
-	private RegraMapa mapa;
-	
-	
+
+	private List<No> atual;
+	private List<No> proximo;
+	private Vizinho vizinho;
+
 	public static void main(String[] args) {
+		RegraMapa mapa = new RegraMapa();
+		mapa.criarRegra();
+		
 		HillClimb climp = new HillClimb();
 		List<No> nos = new ArrayList<>();
+		int contador = 0;
 		
-		climp.mapa.criarRegra();
+		climp.setAtual(climp.retornaAtual());
+		
+		while(contador < 50){
+		  List<No> proximaSolucao = climp.vizinho.gerarVizinho(climp.atual);
+		  Double atual = mapa.valorFuncaoSolucao(climp.getAtual());
+		  Double proximo = mapa.valorFuncaoSolucao(proximaSolucao);
+		  
+          if(atual > proximo){
+			climp.setAtual(proximaSolucao);
+		  }
+		  contador++;
+		}
+		System.out.println(climp.getAtual());
+	}
+	
+	public List<No> retornaAtual(){
 		
 		No A = new No("A");
 		No B = new No("B");
@@ -22,29 +44,37 @@ public class HillClimb {
 		No D = new No("D");
 		No E = new No("E");
 		
-		nos.add(0, C);
-		nos.add(1, B);
-		nos.add(2, A);
-		nos.add(3, D);
-		nos.add(4, E);
+		List<No> atual = new ArrayList<>();
 		
-		 boolean resultado = climp.mapa.verificarSolucaoPossivel(nos);
-		 System.out.println(resultado);
 		
-	}
-	
-	public HillClimb(){
-		this.mapa = new RegraMapa();
+		atual.add(C);
+		atual.add(B);
+		atual.add(A);
+		atual.add(D);
+		atual.add(E);
+		
+		
+		return atual;
 	}
 
-	public RegraMapa getMapa() {
-		return mapa;
+	public HillClimb() {
+		this.vizinho = new Vizinho();
 	}
 
-	public void setMapa(RegraMapa mapa) {
-		this.mapa = mapa;
+	public List<No> getAtual() {
+		return atual;
 	}
-	
-	
+
+	public void setAtual(List<No> atual) {
+		this.atual = atual;
+	}
+
+	public List<No> getProximo() {
+		return proximo;
+	}
+
+	public void setProximo(List<No> proximo) {
+		this.proximo = proximo;
+	}
 
 }
