@@ -24,15 +24,17 @@ public class HillClimb {
 		climp.setAtual(climp.retornaAtual());
 		
 		while(contador < 50){
-		  List<No> proximaSolucao = climp.vizinho.gerarVizinho(climp.atual);
+		  List<No> proximaSolucao = climp.vizinho.gerarVizinho(new ArrayList<>(climp.atual));
 		  Double atual = mapa.valorFuncaoSolucao(climp.getAtual());
 		  Double proximo = mapa.valorFuncaoSolucao(proximaSolucao);
 		  
-          if(atual > proximo){
+		  if(atual > proximo){
 			climp.setAtual(proximaSolucao);
 		  }
 		  contador++;
+		  
 		}
+		System.out.println("Solução Final: ");
 		System.out.println(climp.getAtual());
 	}
 	
