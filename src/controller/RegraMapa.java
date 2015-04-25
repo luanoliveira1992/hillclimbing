@@ -10,6 +10,11 @@ import model.No;
 public class RegraMapa {
 	private Grafo grafo;
 	
+	public RegraMapa(){
+		this.grafo = new Grafo();
+		this.criarRegra();
+	}
+	
 	
 	public void criarRegra(){
 		No A = new No("A");
@@ -108,12 +113,7 @@ public class RegraMapa {
 		 return false;
 	}
 	
-	public RegraMapa(){
-		this.grafo = new Grafo();
-	}
-
-
-	public Grafo getGrafo() {
+    public Grafo getGrafo() {
 		return grafo;
 	}
 
