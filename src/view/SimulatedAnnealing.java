@@ -44,8 +44,10 @@ public class SimulatedAnnealing {
 			}
 			annealing.temperatura *= 1 - annealing.decrescimo;
 			System.out.println("Solução Temporária: ");
-			System.out.println(atual);
+			System.out.println(atual+" Valor: "+energiaAtual);
 		}
+		System.out.println("Solução Final: ");
+		System.out.println(atual);
 
 	}
 

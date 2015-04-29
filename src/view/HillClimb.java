@@ -29,6 +29,8 @@ public class HillClimb {
 		  Double proximo = mapa.valorFuncaoSolucao(proximaSolucao);
 		  
 		  if(atual > proximo){
+			
+			System.out.println(climp.getAtual()+" Valor :"+proximo);
 			climp.setAtual(proximaSolucao);
 		  }
 		  contador++;

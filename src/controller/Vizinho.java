@@ -25,6 +25,10 @@ public class Vizinho {
 		return resultado;
 	}
 	
+	/*
+	 * Método faz a mudança de posição no array de solução
+	 * para gerar um novo vizinho
+	 * */
 	private static List<No> fazMudanca(List<No> atual, int mudanca){
 		No esquerdo = atual.get(mudanca);
 		No direito = atual.get(mudanca-1);

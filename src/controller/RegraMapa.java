@@ -15,7 +15,9 @@ public class RegraMapa {
 		this.criarRegra();
 	}
 	
-	
+	/*
+	 * Cria a solução inicial
+	 * */
 	public void criarRegra(){
 		No A = new No("A");
 		No B = new No("B");
@@ -42,6 +44,9 @@ public class RegraMapa {
 		this.getGrafo().setArestas(aresta);
 	}
 	
+	/*
+	 * Verifica se uma dada solução é um caminho válido no grafo
+	 * */
 	public boolean verificarSolucaoPossivel(List<No> solucao){
 		
 		byte resultado = 0;
@@ -67,6 +72,9 @@ public class RegraMapa {
 		
 	}
 	
+	/*
+	 * Retorna o valor da função objetiva da solução
+	 * */
 	public Double valorFuncaoSolucao(List<No> solucao){
 
 		List<String> resultadosVisto = new ArrayList<>();
@@ -103,7 +111,9 @@ public class RegraMapa {
 		}
 		return resultado;
 	}
-	
+	/*
+	 * Método auxiliar
+	 * */
 	public boolean alteraValorResultado(String primeira, String segunda, List<String> resultadosVisto){
 		 String valorAtual = segunda+primeira;
 		 Boolean valor = resultadosVisto.contains(valorAtual);
